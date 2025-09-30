@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
+import colivLogo from "@/assets/coliv-logo.png";
 
 const Navigation = () => {
   return (
     <nav className="flex items-center justify-between p-6 bg-background/80 backdrop-blur-sm border-b border-border/50">
       <div className="flex items-center space-x-2">
-        <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-          <span className="text-primary-foreground font-bold text-sm">C</span>
-        </div>
+        <img src={colivLogo} alt="CoLiv Manager Logo" className="w-10 h-10" />
         <span className="text-xl font-bold text-foreground">CoLivManager</span>
       </div>
       
@@ -23,7 +22,6 @@ const Navigation = () => {
       </div>
       
       <div className="flex items-center space-x-4">
-        <Button variant="ghost">Log In</Button>
         <Button variant="cta">Get Started</Button>
       </div>
     </nav>

@@ -1,3 +1,5 @@
+import colivLogo from "@/assets/coliv-logo.png";
+
 const Footer = () => {
   return (
     <footer className="bg-foreground/5 border-t border-border/50 py-12">
@@ -6,9 +8,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">C</span>
-              </div>
+              <img src={colivLogo} alt="CoLiv Manager Logo" className="w-10 h-10" />
               <span className="text-xl font-bold text-foreground">CoLivManager</span>
             </div>
             <p className="text-muted-foreground">
@@ -48,18 +48,18 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Support */}
+          {/* Contact */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-foreground">Support</h4>
+            <h4 className="font-semibold text-foreground">Contact</h4>
             <div className="space-y-2">
-              <a href="#help" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Help Center
+              <a href="tel:+917013034822" className="block text-muted-foreground hover:text-foreground transition-colors">
+                +91 7013034822
               </a>
-              <a href="#privacy" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Privacy Policy
+              <a href="mailto:raj@singingbirdapps.com" className="block text-muted-foreground hover:text-foreground transition-colors">
+                raj@singingbirdapps.com
               </a>
-              <a href="#terms" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Terms of Service
+              <a href="https://maps.app.goo.gl/vMNFSTspytYsnGeP9" target="_blank" rel="noopener noreferrer" className="block text-muted-foreground hover:text-foreground transition-colors">
+                View Location
               </a>
             </div>
           </div>
