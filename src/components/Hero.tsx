@@ -29,7 +29,7 @@ const Hero = () => {
             
             <div className="flex items-center gap-8 pt-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">500+</div>
+                <div className="text-2xl font-bold text-foreground">25</div>
                 <div className="text-sm text-muted-foreground">Properties</div>
               </div>
               <div className="text-center">
