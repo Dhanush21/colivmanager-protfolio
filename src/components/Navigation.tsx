@@ -21,9 +21,6 @@ const Navigation = () => {
         </a>
       </div>
       
-      <div className="flex items-center space-x-4">
-        <Button variant="cta">Get Started</Button>
-      </div>
     </nav>
   );
 };
