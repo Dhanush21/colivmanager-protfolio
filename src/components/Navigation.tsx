@@ -16,7 +16,7 @@ const Navigation = () => {
         <a href="#pricing" className="text-foreground/80 hover:text-foreground transition-colors">
           Pricing
         </a>
-        <a href="#contact" className="text-foreground/80 hover:text-foreground transition-colors">
+        <a href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors">
           Contact
         </a>
       </div>

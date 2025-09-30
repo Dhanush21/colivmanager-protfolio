@@ -26,14 +26,6 @@ const Hero = () => {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="lg" className="text-lg px-8 py-4">
-                Start Free Trial
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-4">
-                Watch Demo
-              </Button>
-            </div>
             
             <div className="flex items-center gap-8 pt-4">
               <div className="text-center">
@@ -51,14 +43,18 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Dashboard Preview */}
+          {/* Video Preview */}
           <div className="relative">
             <div className="bg-gradient-card rounded-2xl p-8 shadow-large">
-              <img 
-                src={heroImage} 
-                alt="CoLivManager Dashboard Preview" 
-                className="w-full h-auto rounded-xl shadow-medium"
-              />
+              <div className="relative rounded-xl overflow-hidden shadow-medium" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="CoLivManager Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
             {/* Floating elements */}
             <div className="absolute -top-4 -right-4 bg-background border border-border rounded-lg p-4 shadow-soft">
