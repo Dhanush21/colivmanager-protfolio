@@ -33,7 +33,7 @@ const Hero = () => {
                 <div className="text-sm text-muted-foreground">Properties</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">10k+</div>
+                <div className="text-2xl font-bold text-foreground">400</div>
                 <div className="text-sm text-muted-foreground">Residents</div>
               </div>
               <div className="text-center">
