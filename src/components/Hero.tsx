@@ -49,7 +49,7 @@ const Hero = () => {
               <div className="relative rounded-xl overflow-hidden shadow-medium" style={{ paddingBottom: '56.25%' }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/FpgjXb72PBc"
+                  src="https://www.loom.com/embed/4a9dbf3eb9d14c33baf1285efe2b5595?sid=c218762e-08ec-4a4f-bc68-0cb7355afcec"
                   title="CoLivManager Demo"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

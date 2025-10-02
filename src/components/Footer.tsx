@@ -52,9 +52,6 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Contact</h4>
             <div className="space-y-2">
-              <a href="tel:+917013034822" className="block text-muted-foreground hover:text-foreground transition-colors">
-                +91 7013034822
-              </a>
               <a href="mailto:raj@singingbirdapps.com" className="block text-muted-foreground hover:text-foreground transition-colors">
                 raj@singingbirdapps.com
               </a>
