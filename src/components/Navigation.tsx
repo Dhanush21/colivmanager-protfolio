@@ -10,6 +10,9 @@ const Navigation = () => {
       </div>
       
       <div className="hidden md:flex items-center space-x-8">
+        <a href="#about" className="text-foreground/80 hover:text-foreground transition-colors">
+          About
+        </a>
         <a href="#features" className="text-foreground/80 hover:text-foreground transition-colors">
           Features
         </a>
