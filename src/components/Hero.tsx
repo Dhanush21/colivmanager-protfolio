@@ -45,7 +45,7 @@ const Hero = () => {
             
             <Button variant="hero" size="lg" className="gap-2 w-fit">
               <Download className="w-5 h-5" />
-              Download App
+              Download Now
             </Button>
           </div>
           

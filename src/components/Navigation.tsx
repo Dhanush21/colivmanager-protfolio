@@ -25,7 +25,7 @@ const Navigation = () => {
         </a>
         <Button variant="hero" size="sm" className="gap-2">
           <Download className="w-4 h-4" />
-          Download App
+          Download Now
         </Button>
       </div>
       
