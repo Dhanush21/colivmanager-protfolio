@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import colivLogo from "@/assets/coliv-logo.png";
+import { Download } from "lucide-react";
 
 const Navigation = () => {
   return (
@@ -22,6 +23,10 @@ const Navigation = () => {
         <a href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors">
           Contact
         </a>
+        <Button variant="hero" size="sm" className="gap-2">
+          <Download className="w-4 h-4" />
+          Download App
+        </Button>
       </div>
       
     </nav>

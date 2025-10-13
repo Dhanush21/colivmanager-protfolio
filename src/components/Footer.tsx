@@ -1,4 +1,5 @@
 import colivLogo from "@/assets/coliv-logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -45,6 +46,9 @@ const Footer = () => {
               <a href="#careers" className="block text-muted-foreground hover:text-foreground transition-colors">
                 Careers
               </a>
+              <Link to="/privacy-policy" className="block text-muted-foreground hover:text-foreground transition-colors">
+                Privacy Policy
+              </Link>
             </div>
           </div>
           
