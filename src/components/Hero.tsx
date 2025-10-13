@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-dashboard.jpg";
+import { Download } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -41,6 +42,11 @@ const Hero = () => {
                 <div className="text-sm text-muted-foreground">Uptime</div>
               </div>
             </div>
+            
+            <Button variant="hero" size="lg" className="gap-2 w-fit">
+              <Download className="w-5 h-5" />
+              Download App
+            </Button>
           </div>
           
           {/* Video Previews */}
