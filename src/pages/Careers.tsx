@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ApplicationForm from "@/components/ApplicationForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
@@ -107,14 +108,19 @@ const Careers = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">
-              Don't see the right position? We're always looking for talented people.
+        </div>
+      </section>
+
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Submit Your Application</h2>
+            <p className="text-muted-foreground">
+              Interested in joining our team? Fill out the form below and we'll be in touch.
             </p>
-            <Button variant="outline" size="lg">
-              Send Us Your Resume
-            </Button>
           </div>
+          
+          <ApplicationForm />
         </div>
       </section>
 
