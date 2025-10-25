@@ -49,9 +49,9 @@ const applicationSchema = z.object({
     .trim()
     .min(10, { message: "Message must be at least 10 characters" })
     .max(1000, { message: "Message must be less than 1000 characters" }),
-  resumeUrl: z
+  linkedinUrl: z
     .string()
-    .url({ message: "Invalid URL format" })
+    .url({ message: "Invalid LinkedIn URL format" })
     .optional()
     .or(z.literal("")),
 });
@@ -70,7 +70,7 @@ const ApplicationForm = () => {
       phone: "",
       position: "",
       message: "",
-      resumeUrl: "",
+      linkedinUrl: "",
     },
   });
 
@@ -78,8 +78,17 @@ const ApplicationForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission - replace with actual API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-application`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit application');
+      }
       
       toast({
         title: "Application Submitted!",
@@ -187,14 +196,14 @@ const ApplicationForm = () => {
 
             <FormField
               control={form.control}
-              name="resumeUrl"
+              name="linkedinUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Resume URL (Optional)</FormLabel>
+                  <FormLabel>LinkedIn URL (Optional)</FormLabel>
                   <FormControl>
                     <Input 
                       type="url" 
-                      placeholder="https://drive.google.com/your-resume" 
+                      placeholder="https://linkedin.com/in/your-profile" 
                       {...field} 
                     />
                   </FormControl>
