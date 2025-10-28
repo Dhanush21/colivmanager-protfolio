@@ -6,6 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
 
 const Careers = () => {
+  const scrollToApplication = () => {
+    const formSection = document.getElementById('application-form');
+    formSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const positions = [
     {
       title: "Senior Property Manager",
@@ -101,7 +106,7 @@ const Careers = () => {
                         {position.department} • {position.location} • {position.type}
                       </CardDescription>
                     </div>
-                    <Button variant="default">Apply Now</Button>
+                    <Button variant="default" onClick={scrollToApplication}>Apply Now</Button>
                   </div>
                 </CardHeader>
               </Card>
@@ -111,7 +116,7 @@ const Careers = () => {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-muted/30">
+      <section id="application-form" className="py-20 px-6 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Submit Your Application</h2>
