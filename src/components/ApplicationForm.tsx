@@ -23,6 +23,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const applicationSchema = z.object({
   fullName: z
@@ -78,16 +79,19 @@ const ApplicationForm = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-application`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const { error } = await supabase
+        .from('applications')
+        .insert({
+          full_name: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          position: data.position,
+          linkedin_url: data.linkedinUrl || null,
+          message: data.message,
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit application');
+      if (error) {
+        throw error;
       }
       
       toast({
@@ -97,6 +101,7 @@ const ApplicationForm = () => {
       
       form.reset();
     } catch (error) {
+      console.error('Application submission error:', error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again later.",
