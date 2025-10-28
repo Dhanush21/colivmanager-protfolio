@@ -36,12 +36,15 @@ const applicationSchema = z.object({
     .trim()
     .email({ message: "Invalid email address" })
     .max(255, { message: "Email must be less than 255 characters" }),
+  countryCode: z
+    .string()
+    .min(1, { message: "Please select a country code" }),
   phone: z
     .string()
     .trim()
-    .min(10, { message: "Phone number must be at least 10 digits" })
-    .max(20, { message: "Phone number must be less than 20 characters" })
-    .regex(/^[0-9+\-\s()]+$/, { message: "Invalid phone number format" }),
+    .min(7, { message: "Phone number must be at least 7 digits" })
+    .max(15, { message: "Phone number must be less than 15 characters" })
+    .regex(/^[0-9\s\-()]+$/, { message: "Invalid phone number format" }),
   position: z
     .string()
     .min(1, { message: "Please select a position" }),
@@ -57,6 +60,25 @@ const applicationSchema = z.object({
     .or(z.literal("")),
 });
 
+const countryCodes = [
+  { code: "+1", country: "US/CA" },
+  { code: "+44", country: "UK" },
+  { code: "+91", country: "India" },
+  { code: "+86", country: "China" },
+  { code: "+81", country: "Japan" },
+  { code: "+49", country: "Germany" },
+  { code: "+33", country: "France" },
+  { code: "+39", country: "Italy" },
+  { code: "+34", country: "Spain" },
+  { code: "+61", country: "Australia" },
+  { code: "+971", country: "UAE" },
+  { code: "+966", country: "Saudi Arabia" },
+  { code: "+20", country: "Egypt" },
+  { code: "+27", country: "South Africa" },
+  { code: "+55", country: "Brazil" },
+  { code: "+52", country: "Mexico" },
+];
+
 type ApplicationFormData = z.infer<typeof applicationSchema>;
 
 const ApplicationForm = () => {
@@ -68,6 +90,7 @@ const ApplicationForm = () => {
     defaultValues: {
       fullName: "",
       email: "",
+      countryCode: "+1",
       phone: "",
       position: "",
       message: "",
@@ -84,7 +107,7 @@ const ApplicationForm = () => {
         .insert({
           full_name: data.fullName,
           email: data.email,
-          phone: data.phone,
+          phone: `${data.countryCode} ${data.phone}`,
           position: data.position,
           linkedin_url: data.linkedinUrl || null,
           message: data.message,
@@ -160,19 +183,46 @@ const ApplicationForm = () => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="+1 (555) 123-4567" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="space-y-2">
+              <FormLabel>Phone Number *</FormLabel>
+              <div className="flex gap-2">
+                <FormField
+                  control={form.control}
+                  name="countryCode"
+                  render={({ field }) => (
+                    <FormItem className="w-[120px]">
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Code" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-background z-50">
+                          {countryCodes.map((item) => (
+                            <SelectItem key={item.code} value={item.code}>
+                              {item.code} {item.country}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input placeholder="555 123 4567" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
 
             <FormField
               control={form.control}
