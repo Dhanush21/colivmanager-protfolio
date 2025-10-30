@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CareerApplicationForm from "@/components/CareerApplicationForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
@@ -111,6 +112,12 @@ const Careers = () => {
             ))}
           </div>
 
+        </div>
+      </section>
+
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <CareerApplicationForm />
         </div>
       </section>
 
