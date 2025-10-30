@@ -1,16 +1,10 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ApplicationForm from "@/components/ApplicationForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
 
 const Careers = () => {
-  const scrollToApplication = () => {
-    const formSection = document.getElementById('application-form');
-    formSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   const positions = [
     {
       title: "Senior Property Manager",
@@ -106,26 +100,17 @@ const Careers = () => {
                         {position.department} • {position.location} • {position.type}
                       </CardDescription>
                     </div>
-                    <Button variant="default" onClick={scrollToApplication}>Apply Now</Button>
+                    <Button variant="default" asChild>
+                      <a href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer">
+                        Apply Now
+                      </a>
+                    </Button>
                   </div>
                 </CardHeader>
               </Card>
             ))}
           </div>
 
-        </div>
-      </section>
-
-      <section id="application-form" className="py-20 px-6 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Submit Your Application</h2>
-            <p className="text-muted-foreground">
-              Interested in joining our team? Fill out the form below and we'll be in touch.
-            </p>
-          </div>
-          
-          <ApplicationForm />
         </div>
       </section>
 
