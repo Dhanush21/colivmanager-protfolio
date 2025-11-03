@@ -102,9 +102,8 @@ const CareerApplicationForm = () => {
       if (error) throw error;
 
       // Send to Google Sheets via Google Script
-      const googleScriptUrl = "YOUR_GOOGLE_SCRIPT_URL"; // User needs to replace this
       try {
-        await fetch(googleScriptUrl, {
+        await fetch("https://script.google.com/macros/s/AKfycbzSjnaDU8WUZ-USPs2voqxbnjQH1itG2fT5escBAJD0d22Jwifg54_y0QK36JMG86Ws/exec", {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
