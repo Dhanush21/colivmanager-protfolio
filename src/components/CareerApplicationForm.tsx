@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -19,14 +20,14 @@ const applicationSchema = z.object({
     .trim()
     .email({ message: "Invalid email address" })
     .max(255, { message: "Email must be less than 255 characters" }),
+  country_code: z.string()
+    .min(1, { message: "Country code is required" }),
   phone: z.string()
     .trim()
     .min(10, { message: "Phone number must be at least 10 digits" })
     .max(20, { message: "Phone number must be less than 20 characters" }),
   position: z.string()
-    .trim()
-    .min(1, { message: "Position is required" })
-    .max(100, { message: "Position must be less than 100 characters" }),
+    .min(1, { message: "Position is required" }),
   linkedin_url: z.string()
     .trim()
     .url({ message: "Invalid LinkedIn URL" })
@@ -39,30 +40,60 @@ const applicationSchema = z.object({
     .max(1000, { message: "Message must be less than 1000 characters" })
 });
 
+const countryCodes = [
+  { code: "+1", country: "US/Canada" },
+  { code: "+44", country: "UK" },
+  { code: "+91", country: "India" },
+  { code: "+86", country: "China" },
+  { code: "+81", country: "Japan" },
+  { code: "+49", country: "Germany" },
+  { code: "+33", country: "France" },
+  { code: "+39", country: "Italy" },
+  { code: "+34", country: "Spain" },
+  { code: "+61", country: "Australia" },
+];
+
+const positions = [
+  "Senior Property Manager",
+  "Customer Success Specialist",
+  "Full Stack Developer",
+  "Product Designer",
+  "Marketing Manager"
+];
+
 type ApplicationFormData = z.infer<typeof applicationSchema>;
 
 const CareerApplicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [countryCode, setCountryCode] = useState("+1");
+  const [position, setPosition] = useState("");
   
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setValue
   } = useForm<ApplicationFormData>({
-    resolver: zodResolver(applicationSchema)
+    resolver: zodResolver(applicationSchema),
+    defaultValues: {
+      country_code: "+1"
+    }
   });
 
   const onSubmit = async (data: ApplicationFormData) => {
     setIsSubmitting(true);
     
     try {
+      const fullPhone = `${data.country_code}${data.phone}`;
+      
+      // Insert into Supabase
       const { error } = await supabase
         .from("careers_applications")
         .insert({
           full_name: data.full_name,
           email: data.email,
-          phone: data.phone,
+          phone: fullPhone,
           position: data.position,
           linkedin_url: data.linkedin_url || null,
           message: data.message
@@ -70,12 +101,35 @@ const CareerApplicationForm = () => {
 
       if (error) throw error;
 
+      // Send to Google Sheets via Zapier webhook
+      const webhookUrl = "YOUR_ZAPIER_WEBHOOK_URL"; // User needs to replace this
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
+          body: JSON.stringify({
+            full_name: data.full_name,
+            email: data.email,
+            phone: fullPhone,
+            position: data.position,
+            linkedin_url: data.linkedin_url || "",
+            message: data.message,
+            submitted_at: new Date().toISOString()
+          })
+        });
+      } catch (webhookError) {
+        console.error("Webhook error:", webhookError);
+      }
+
       toast({
         title: "Application submitted!",
         description: "Thank you for your interest. We'll be in touch soon.",
       });
       
       reset();
+      setCountryCode("+1");
+      setPosition("");
     } catch (error) {
       toast({
         title: "Error",
@@ -122,11 +176,32 @@ const CareerApplicationForm = () => {
 
           <div className="space-y-2">
             <Label htmlFor="phone">Phone *</Label>
-            <Input
-              id="phone"
-              {...register("phone")}
-              placeholder="+1234567890"
-            />
+            <div className="flex gap-2">
+              <Select
+                value={countryCode}
+                onValueChange={(value) => {
+                  setCountryCode(value);
+                  setValue("country_code", value);
+                }}
+              >
+                <SelectTrigger className="w-[140px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {countryCodes.map((item) => (
+                    <SelectItem key={item.code} value={item.code}>
+                      {item.code} {item.country}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Input
+                id="phone"
+                {...register("phone")}
+                placeholder="1234567890"
+                className="flex-1"
+              />
+            </div>
             {errors.phone && (
               <p className="text-sm text-destructive">{errors.phone.message}</p>
             )}
@@ -134,11 +209,24 @@ const CareerApplicationForm = () => {
 
           <div className="space-y-2">
             <Label htmlFor="position">Position *</Label>
-            <Input
-              id="position"
-              {...register("position")}
-              placeholder="e.g., Senior Property Manager"
-            />
+            <Select
+              value={position}
+              onValueChange={(value) => {
+                setPosition(value);
+                setValue("position", value);
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select a position" />
+              </SelectTrigger>
+              <SelectContent>
+                {positions.map((pos) => (
+                  <SelectItem key={pos} value={pos}>
+                    {pos}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             {errors.position && (
               <p className="text-sm text-destructive">{errors.position.message}</p>
             )}

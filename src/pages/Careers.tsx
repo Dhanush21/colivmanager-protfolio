@@ -101,10 +101,15 @@ const Careers = () => {
                         {position.department} • {position.location} • {position.type}
                       </CardDescription>
                     </div>
-                    <Button variant="default" asChild>
-                      <a href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer">
-                        Apply Now
-                      </a>
+                    <Button 
+                      variant="default" 
+                      onClick={() => {
+                        document.getElementById('application-form')?.scrollIntoView({ 
+                          behavior: 'smooth' 
+                        });
+                      }}
+                    >
+                      Apply Now
                     </Button>
                   </div>
                 </CardHeader>
@@ -115,7 +120,7 @@ const Careers = () => {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-muted/30">
+      <section id="application-form" className="py-20 px-6 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <CareerApplicationForm />
         </div>
