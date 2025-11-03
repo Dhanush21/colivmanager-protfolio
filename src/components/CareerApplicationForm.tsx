@@ -101,25 +101,24 @@ const CareerApplicationForm = () => {
 
       if (error) throw error;
 
-      // Send to Google Sheets via Zapier webhook
-      const webhookUrl = "YOUR_ZAPIER_WEBHOOK_URL"; // User needs to replace this
+      // Send to Google Sheets via Google Script
+      const googleScriptUrl = "YOUR_GOOGLE_SCRIPT_URL"; // User needs to replace this
       try {
-        await fetch(webhookUrl, {
+        await fetch(googleScriptUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
           mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            full_name: data.full_name,
+            fullName: data.full_name,
             email: data.email,
             phone: fullPhone,
             position: data.position,
-            linkedin_url: data.linkedin_url || "",
-            message: data.message,
-            submitted_at: new Date().toISOString()
+            linkedInUrl: data.linkedin_url || "",
+            reason: data.message
           })
         });
-      } catch (webhookError) {
-        console.error("Webhook error:", webhookError);
+      } catch (scriptError) {
+        console.error("Google Script error:", scriptError);
       }
 
       toast({
