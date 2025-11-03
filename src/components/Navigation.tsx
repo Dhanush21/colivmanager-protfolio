@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import colivLogo from "@/assets/coliv-logo.png";
 import { Download, Menu } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -32,10 +33,10 @@ const Navigation = () => {
 
   return (
     <nav className="flex items-center justify-between p-6 bg-background/80 backdrop-blur-sm border-b border-border/50">
-      <div className="flex items-center space-x-2">
+      <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
         <img src={colivLogo} alt="CoLiv Manager Logo" className="w-10 h-10" />
         <span className="text-xl font-bold text-foreground">CoLivManager</span>
-      </div>
+      </Link>
       
       <div className="hidden md:flex items-center space-x-8">
         {navLinks}
