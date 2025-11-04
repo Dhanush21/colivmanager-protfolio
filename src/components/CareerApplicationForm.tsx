@@ -103,7 +103,7 @@ const CareerApplicationForm = () => {
 
       // Send to Google Sheets via Google Script
       try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbz2H4xu-K8KK4ToUwQKglpITUqeCXryu88lZuyMkjWI1I8_PpfrcL4KtSgnOmQ6J-3K/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwCnZF9dsWJuzsuJULqg3HZ-91WQpKnRwy35qY91qUPQ3IuXw2jE3sxl1rNq67ctaaL/exec", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
