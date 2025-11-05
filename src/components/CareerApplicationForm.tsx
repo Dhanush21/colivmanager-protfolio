@@ -103,8 +103,9 @@ const CareerApplicationForm = () => {
 
       // Send to Google Sheets via Google Script
       try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwCnZF9dsWJuzsuJULqg3HZ-91WQpKnRwy35qY91qUPQ3IuXw2jE3sxl1rNq67ctaaL/exec", {
+        await fetch("https://script.google.com/macros/s/AKfycbyouICbujB3qE7hgiPgkO4AuJ-Ev2XU_dy3MxkOG6ijcMHVpDJxFsXX-s_CCugifKf5/exec", {
           method: "POST",
+          mode: "no-cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             fullName: data.full_name,
@@ -115,12 +116,6 @@ const CareerApplicationForm = () => {
             reason: data.message
           })
         });
-
-        const result = await response.json();
-        
-        if (result.result !== "success") {
-          console.error("Google Script submission failed:", result);
-        }
       } catch (scriptError) {
         console.error("Google Script error:", scriptError);
       }
