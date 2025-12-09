@@ -24,17 +24,7 @@ const Navigation = () => {
       <a href="/careers" className="text-foreground/80 hover:text-foreground transition-colors">
         Careers
       </a>
-      <a 
-        href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-foreground/80 hover:text-foreground transition-colors"
-        onClick={() => {
-          if (typeof window !== 'undefined' && (window as any).fbq) {
-            (window as any).fbq('track', 'Contact');
-          }
-        }}
-      >
+      <a href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors">
         Contact
       </a>
     </>

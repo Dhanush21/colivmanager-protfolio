@@ -22,16 +22,7 @@ const CTA = () => {
                 Start Free Trial
               </Button>
               <Button variant="outline" size="lg" className="text-lg px-8 py-4" asChild>
-                <a 
-                  href="https://calendly.com/singingbirdapps/raj-s-personal-meeting-room" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && (window as any).fbq) {
-                      (window as any).fbq('track', 'Schedule');
-                    }
-                  }}
-                >
+                <a href="https://calendly.com/singingbirdapps/raj-s-personal-meeting-room" target="_blank" rel="noopener noreferrer">
                   Schedule Demo
                 </a>
               </Button>
