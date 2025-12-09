@@ -120,6 +120,11 @@ const CareerApplicationForm = () => {
         console.error("Google Script error:", scriptError);
       }
 
+      // Fire Meta Pixel Lead event on successful submission
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Lead');
+      }
+
       toast({
         title: "Application submitted!",
         description: "Thank you for your interest. We'll be in touch soon.",
