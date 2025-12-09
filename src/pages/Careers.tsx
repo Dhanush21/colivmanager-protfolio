@@ -4,8 +4,18 @@ import CareerApplicationForm from "@/components/CareerApplicationForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Briefcase, Users, TrendingUp, Heart } from "lucide-react";
+import { useEffect } from "react";
 
 const Careers = () => {
+  // Fire ViewContent event when Careers page loads
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'ViewContent', {
+        content_name: 'Careers Page',
+        content_category: 'Careers'
+      });
+    }
+  }, []);
   const positions = [
     {
       title: "Senior Property Manager",
