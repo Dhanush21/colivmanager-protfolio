@@ -3,28 +3,35 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import colivLogo from "@/assets/coliv-logo.png";
 import { Download, Menu } from "lucide-react";
 import { useState } from "react";
+import { trackButtonClick, trackNavigation, trackExternalLink } from "@/lib/analytics";
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
 
   const navLinks = (
     <>
-      <a href="/" className="text-foreground/80 hover:text-foreground transition-colors">
+      <a href="/" className="text-foreground/80 hover:text-foreground transition-colors" onClick={() => trackNavigation('home')}>
         Home
       </a>
-      <a href="#about" className="text-foreground/80 hover:text-foreground transition-colors">
+      <a href="#about" className="text-foreground/80 hover:text-foreground transition-colors" onClick={() => trackNavigation('about')}>
         About
       </a>
-      <a href="#features" className="text-foreground/80 hover:text-foreground transition-colors">
+      <a href="#features" className="text-foreground/80 hover:text-foreground transition-colors" onClick={() => trackNavigation('features')}>
         Features
       </a>
-      <a href="#pricing" className="text-foreground/80 hover:text-foreground transition-colors">
+      <a href="#pricing" className="text-foreground/80 hover:text-foreground transition-colors" onClick={() => trackNavigation('pricing')}>
         Pricing
       </a>
-      <a href="/careers" className="text-foreground/80 hover:text-foreground transition-colors">
+      <a href="/careers" className="text-foreground/80 hover:text-foreground transition-colors" onClick={() => trackNavigation('careers')}>
         Careers
       </a>
-      <a href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-foreground transition-colors">
+      <a 
+        href="https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-foreground/80 hover:text-foreground transition-colors"
+        onClick={() => trackExternalLink('https://api.whatsapp.com/message/SJQKEVLM6O2JG1?autoload=1&app_absent=0', 'Contact WhatsApp')}
+      >
         Contact
       </a>
     </>
@@ -39,7 +46,12 @@ const Navigation = () => {
       
       <div className="hidden md:flex items-center space-x-8">
         {navLinks}
-        <Button variant="hero" size="sm" className="gap-2">
+        <Button 
+          variant="hero" 
+          size="sm" 
+          className="gap-2"
+          onClick={() => trackButtonClick('Download Now', 'navigation')}
+        >
           <Download className="w-4 h-4" />
           Download Now
         </Button>
@@ -54,7 +66,12 @@ const Navigation = () => {
         <SheetContent side="right" className="w-[300px]">
           <div className="flex flex-col space-y-6 mt-8">
             {navLinks}
-            <Button variant="hero" size="sm" className="gap-2 w-full">
+            <Button 
+              variant="hero" 
+              size="sm" 
+              className="gap-2 w-full"
+              onClick={() => trackButtonClick('Download Now', 'mobile_navigation')}
+            >
               <Download className="w-4 h-4" />
               Download Now
             </Button>

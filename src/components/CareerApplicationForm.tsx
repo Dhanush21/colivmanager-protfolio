@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { trackFormSubmission } from "@/lib/analytics";
 
 const applicationSchema = z.object({
   full_name: z.string()
@@ -120,6 +121,8 @@ const CareerApplicationForm = () => {
         console.error("Google Script error:", scriptError);
       }
 
+      trackFormSubmission('career_application', true);
+      
       toast({
         title: "Application submitted!",
         description: "Thank you for your interest. We'll be in touch soon.",
@@ -129,6 +132,7 @@ const CareerApplicationForm = () => {
       setCountryCode("+1");
       setPosition("");
     } catch (error) {
+      trackFormSubmission('career_application', false);
       toast({
         title: "Error",
         description: "Failed to submit application. Please try again.",

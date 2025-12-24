@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { trackButtonClick, trackExternalLink } from "@/lib/analytics";
 
 const CTA = () => {
   return (
@@ -18,11 +19,21 @@ const CTA = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="hero" size="lg" className="text-lg px-8 py-4">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="text-lg px-8 py-4"
+                onClick={() => trackButtonClick('Start Free Trial', 'cta')}
+              >
                 Start Free Trial
               </Button>
               <Button variant="outline" size="lg" className="text-lg px-8 py-4" asChild>
-                <a href="https://calendly.com/singingbirdapps/raj-s-personal-meeting-room" target="_blank" rel="noopener noreferrer">
+                <a 
+                  href="https://calendly.com/singingbirdapps/raj-s-personal-meeting-room" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => trackExternalLink('https://calendly.com/singingbirdapps/raj-s-personal-meeting-room', 'Schedule Demo')}
+                >
                   Schedule Demo
                 </a>
               </Button>
