@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-dashboard.jpg";
 import { Download } from "lucide-react";
-
+import { trackButtonClick } from "@/lib/analytics";
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-secondary/20 overflow-hidden">
@@ -43,7 +43,12 @@ const Hero = () => {
               </div>
             </div>
             
-            <Button variant="hero" size="lg" className="gap-2 w-fit">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="gap-2 w-fit"
+              onClick={() => trackButtonClick('Download Now', 'hero')}
+            >
               <Download className="w-5 h-5" />
               Download Now
             </Button>

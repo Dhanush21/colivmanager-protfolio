@@ -1,0 +1,44 @@
+// Google Analytics 4 event tracking utility
+
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+  }
+}
+
+export const trackEvent = (
+  eventName: string,
+  params?: Record<string, string | number | boolean>
+) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', eventName, params);
+  }
+};
+
+// Predefined tracking functions for common events
+export const trackButtonClick = (buttonName: string, location?: string) => {
+  trackEvent('button_click', {
+    button_name: buttonName,
+    location: location || 'unknown',
+  });
+};
+
+export const trackFormSubmission = (formName: string, success: boolean) => {
+  trackEvent('form_submission', {
+    form_name: formName,
+    success,
+  });
+};
+
+export const trackNavigation = (destination: string) => {
+  trackEvent('navigation_click', {
+    destination,
+  });
+};
+
+export const trackExternalLink = (url: string, linkName: string) => {
+  trackEvent('external_link_click', {
+    url,
+    link_name: linkName,
+  });
+};
