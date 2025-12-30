@@ -49,3 +49,12 @@ export const trackScrollDepth = (percentage: number, pagePath: string) => {
     page_path: pagePath,
   });
 };
+
+export const trackPageView = (pagePath: string, pageTitle?: string) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('config', 'G-FH3SD6F8WD', {
+      page_path: pagePath,
+      page_title: pageTitle || document.title,
+    });
+  }
+};
