@@ -65,3 +65,30 @@ export const trackTimeOnPage = (seconds: number, pagePath: string) => {
     page_path: pagePath,
   });
 };
+
+export const trackVideoPlay = (videoTitle: string, currentTime?: number) => {
+  trackEvent('video_play', {
+    video_title: videoTitle,
+    current_time: currentTime || 0,
+  });
+};
+
+export const trackVideoPause = (videoTitle: string, currentTime: number) => {
+  trackEvent('video_pause', {
+    video_title: videoTitle,
+    current_time: currentTime,
+  });
+};
+
+export const trackVideoComplete = (videoTitle: string) => {
+  trackEvent('video_complete', {
+    video_title: videoTitle,
+  });
+};
+
+export const trackVideoProgress = (videoTitle: string, percentage: number) => {
+  trackEvent('video_progress', {
+    video_title: videoTitle,
+    progress_percentage: percentage,
+  });
+};
