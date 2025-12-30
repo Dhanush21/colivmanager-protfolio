@@ -58,3 +58,10 @@ export const trackPageView = (pagePath: string, pageTitle?: string) => {
     });
   }
 };
+
+export const trackTimeOnPage = (seconds: number, pagePath: string) => {
+  trackEvent('time_on_page', {
+    time_seconds: seconds,
+    page_path: pagePath,
+  });
+};

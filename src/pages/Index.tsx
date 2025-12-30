@@ -6,10 +6,12 @@ import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import { trackScrollDepth } from "@/lib/analytics";
+import { trackScrollDepth, trackTimeOnPage } from "@/lib/analytics";
 
 const Index = () => {
   const trackedDepths = useRef<Set<number>>(new Set());
+  const startTime = useRef<number>(Date.now());
+  const trackedTimes = useRef<Set<number>>(new Set());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +30,23 @@ const Index = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timeThresholds = [30, 60, 120, 300]; // 30s, 1m, 2m, 5m
+    
+    const interval = setInterval(() => {
+      const elapsedSeconds = Math.floor((Date.now() - startTime.current) / 1000);
+      
+      timeThresholds.forEach((threshold) => {
+        if (elapsedSeconds >= threshold && !trackedTimes.current.has(threshold)) {
+          trackedTimes.current.add(threshold);
+          trackTimeOnPage(threshold, window.location.pathname);
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
