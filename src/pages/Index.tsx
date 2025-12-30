@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -5,8 +6,30 @@ import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import { trackScrollDepth } from "@/lib/analytics";
 
 const Index = () => {
+  const trackedDepths = useRef<Set<number>>(new Set());
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+      const thresholds = [25, 50, 75, 100];
+      thresholds.forEach((threshold) => {
+        if (scrollPercent >= threshold && !trackedDepths.current.has(threshold)) {
+          trackedDepths.current.add(threshold);
+          trackScrollDepth(threshold, window.location.pathname);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
