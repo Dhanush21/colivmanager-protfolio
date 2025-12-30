@@ -42,3 +42,10 @@ export const trackExternalLink = (url: string, linkName: string) => {
     link_name: linkName,
   });
 };
+
+export const trackScrollDepth = (percentage: number, pagePath: string) => {
+  trackEvent('scroll_depth', {
+    depth_percentage: percentage,
+    page_path: pagePath,
+  });
+};
